@@ -5,5 +5,12 @@ from django.http import HttpResponse  # отправка текстового с
 
 # Create your views here.
 
+#ф-и для выдачи заголовков трех страниц
 def index (request):
-    return HttpResponse("Hello World! Это мой первый проэкт на Dlango!")  # создание ответа пользователю
+    return HttpResponse("<h2>Главная</h2>")
+
+def about (request):
+    return HttpResponse("<h2>О Сайте</h2>")
+
+def contact (request):
+    return HttpResponse("<h2>Контакты</h2>")

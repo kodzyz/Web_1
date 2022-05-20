@@ -17,8 +17,12 @@ from django.contrib import admin
 from django.urls import path  # сопоставление запросов с функцией их обработки
 
 from firstapp import views
-
+#  переменная urlpatterns определяет набор сопоставлений запросов польз-ля с фу-ями обработки этих запросов
 urlpatterns = [
-    path('', views.index, name='home'), # '' - запрос показать корневую страницу  -> будет вызвана ф-я index
-    path('admin/', admin.site.urls),  # страница 'admin/' будет обрабатываться методом admin.site.urls
+    path('', views.index),  # '' - запрос к корню веб-сайта  -> будет обрабатываться  ф-й index
+    path('about', views.about),  # запрос по адресу 'about' -> ф-й about
+    path('contact', views.contact), # запрос 'contact' -> ф-й contact
 ]
+
+# запуск приложения
+# python manage.py runserver
