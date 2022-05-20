@@ -17,12 +17,29 @@ from django.contrib import admin
 from django.urls import path  # сопоставление запросов с функцией их обработки
 
 from firstapp import views
+
+from django.urls import re_path  # задавать адреса с помощью регулярок
+
 #  переменная urlpatterns определяет набор сопоставлений запросов польз-ля с фу-ями обработки этих запросов
 urlpatterns = [
-    path('', views.index),  # '' - запрос к корню веб-сайта  -> будет обрабатываться  ф-й index
-    path('about', views.about),  # запрос по адресу 'about' -> ф-й about
-    path('contact', views.contact), # запрос 'contact' -> ф-й contact
+
+    re_path(r'^about/contact/', views.contact),  # ^about  -> адресс должен начинаться с about
+    re_path(r'^about', views.about),
+    path('', views.index),  # более общие маршруты определяются в последнюю очередь
 ]
 
 # запуск приложения
 # python manage.py runserver
+
+#синтаксис регулярных выражений
+
+# (^) - начало адреса
+# ($) - конец адреса
+# (+) - один и более символов
+# (?) - 0 или 1 символ
+# ({n}) - n символов
+# ({n, m}) - от n до m символов
+# (.) - любой символ
+# (\d+) - одна или несколько цифр
+# (\D+) - одна или несколько НЕ цифр
+# (\w+) - один или буквенных символов
