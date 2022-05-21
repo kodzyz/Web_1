@@ -23,6 +23,18 @@ from django.urls import re_path  # задавать адреса с помощь
 #  переменная urlpatterns определяет набор сопоставлений запросов польз-ля с фу-ями обработки этих запросов
 urlpatterns = [
 
+    # предоставления параметра в шаблоне адресса ?P<>
+    # (?P<имя_параметра>регулярка для параметра)
+
+# Запрос на веб-сайте о продукте с id № 5 -> http://127.0.0.1:8000/products/5/
+    re_path(r'^products/(?P<productid>\d+)/', views.products),  # ?P<productid>\d+ -> последов.цифр
+
+# если в запросе не указан id -> http://127.0.0.1:8000/products
+    re_path(r'^products/$', views.products),  # маршрут по умолчанию (productid=1)
+
+# запрс о пользователе с id № 3 -> http://127.0.0.1:8000/users/3/Виктор/
+    re_path(r'^users/(?P<id>\d+)/(?P<name>\D+)/', views.users),  # <id> -> число, <name> -> из буквенных символов
+
     re_path(r'^about/contact/', views.contact),  # ^about  -> адресс должен начинаться с about
     re_path(r'^about', views.about),
     path('', views.index),  # более общие маршруты определяются в последнюю очередь
