@@ -14,10 +14,15 @@ def about (request):
 def contact (request):
     return HttpResponse("<h2>Контакты</h2>")
 
-def products (request, productid=1) :  # http://127.0.0.1:8000/products/5/ -> Продукт № 5
-    output = f"<h2> Продукт № {productid} </h2"
-    return HttpResponse(output)
+# получение параметров из строки запроса метод -> request.GET.get()
 
-def users (request, id=1, name="Костя") :  # http://127.0.0.1:8000/users/3/Виктор/
+def products (request, productid) :  # http://127.0.0.1:8000/products/3/?cat=Телефоны
+    category = request.GET.get("cat", "")  # ("название параметра строки запроса", "значение по умолчанию")
+    output = f"<h2> Продукт № {productid} Категория: {category} </h2"
+    return HttpResponse(output)  # -> Продукт № 3 Категория: Телефоны
+
+def users (request) :  # http://127.0.0.1:8000/users/?id=8&name=Алексей
+    id = request.GET.get("id", 1)
+    name = request.GET.get("name", "Костя")
     output = f"<h2> Пользователь </h2> <h3> id:{id} Имя: {name} </h3>"
     return HttpResponse(output)
