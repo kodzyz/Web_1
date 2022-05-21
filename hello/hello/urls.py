@@ -23,35 +23,20 @@ from django.urls import re_path  # задавать адреса с помощь
 #  переменная urlpatterns определяет набор сопоставлений запросов польз-ля с фу-ями обработки этих запросов
 urlpatterns = [
 
-    # предоставления параметра в шаблоне адресса ?P<>
-    # (?P<имя_параметра>регулярка для параметра)
+    # параметры ф-и path() -> <спецификатор(int, str, slug, uuid, path): название_параметр>
 
-# Запрос на веб-сайте о продукте с id № 5 -> http://127.0.0.1:8000/products/5/
-    re_path(r'^products/(?P<productid>\d+)/', views.products),  # ?P<productid>\d+ -> последов.цифр
+    path('products/<int:productid>/', views.products),  # http://127.0.0.1:8000/products/5/
 
-# если в запросе не указан id -> http://127.0.0.1:8000/products
-    re_path(r'^products/$', views.products),  # маршрут по умолчанию (productid=1)
+    path('products/', views.products),  # маршрут по умолчанию (productid=1) http://127.0.0.1:8000/products/
 
-# запрс о пользователе с id № 3 -> http://127.0.0.1:8000/users/3/Виктор/
-    re_path(r'^users/(?P<id>\d+)/(?P<name>\D+)/', views.users),  # <id> -> число, <name> -> из буквенных символов
+    path('users/<int:id>/<name>/', views.users),  # http://127.0.0.1:8000/users/3/Виктор/
 
-    re_path(r'^about/contact/', views.contact),  # ^about  -> адресс должен начинаться с about
+    path('users/', views.users),  # маршрут по умолчанию (id=1, name="Костя") http://127.0.0.1:8000/users/
+
+    re_path(r'contact/', views.contact),
     re_path(r'^about', views.about),
-    path('', views.index),  # более общие маршруты определяются в последнюю очередь
+    path('', views.index),
 ]
 
 # запуск приложения
 # python manage.py runserver
-
-#синтаксис регулярных выражений
-
-# (^) - начало адреса
-# ($) - конец адреса
-# (+) - один и более символов
-# (?) - 0 или 1 символ
-# ({n}) - n символов
-# ({n, m}) - от n до m символов
-# (.) - любой символ
-# (\d+) - одна или несколько цифр
-# (\D+) - одна или несколько НЕ цифр
-# (\w+) - один или буквенных символов
