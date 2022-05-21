@@ -32,9 +32,10 @@ urlpatterns = [
 
     path('users/', views.users),  # http://127.0.0.1:8000/users/?id=8&name=Алексей -> id:8 Имя: Алексей
 
-    re_path(r'contact/', views.contact),
-    re_path(r'^about', views.about),
-    path('', views.index),
+    path('details/', views.details),  # http://127.0.0.1:8000/details -> http://127.0.0.1:8000/
+    path('contact/', views.contact),  # http://127.0.0.1:8000/contact/ -> http://127.0.0.1:8000/about/
+    path('about/', views.about),
+    path('', views.index),  # http://127.0.0.1:8000/
 ]
 
 # запуск приложения

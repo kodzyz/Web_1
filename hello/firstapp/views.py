@@ -1,18 +1,23 @@
 # представления -> действия приложений: определение функций, обработка запросов
 
 from django.shortcuts import render
-from django.http import HttpResponse  # отправка текстового содержимого
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect  # временная и постоянная переадресация
 
 # Create your views here.
 
 def index (request):
-    return HttpResponse("<h2>Главная</h2>")
+    return HttpResponse("Index")
 
 def about (request):
-    return HttpResponse("<h2>О Сайте</h2>")
+    return HttpResponse("About")
 
+# временная -> перенаправление по пути "about" что обрабатывается ф-й about
 def contact (request):
-    return HttpResponse("<h2>Контакты</h2>")
+    return HttpResponseRedirect("/about")  # http://127.0.0.1:8000/contact/ -> http://127.0.0.1:8000/about/
+
+# постоянная переадресация в "корень"
+def details (request):
+    return HttpResponsePermanentRedirect("/")  # http://127.0.0.1:8000/details -> http://127.0.0.1:8000/
 
 # получение параметров из строки запроса метод -> request.GET.get()
 
